@@ -8,12 +8,15 @@ export class Connect4Component {
   title = 'Connect 4 Game';
   playerTurn: string = 'Yellow';
   br: number = 0;
+  hasWon:boolean = false;
   constructor(private readonly elementRef: ElementRef) { }
   public handleButtonClick(buttonNumber: string): any {
     // Get the row where the button was clicked
     const buttonClickedRow = this.elementRef.nativeElement.querySelectorAll('.rowDiv')[parseInt(buttonNumber)];
+    console.log(buttonClickedRow);
     for (let i = 5; i >= 0; i--) {
-      const divBox = buttonClickedRow.querySelectorAll('div')[i];
+      const divBox = buttonClickedRow.querySelectorAll('a')[i];
+      console.log(divBox);
       if (!divBox.classList.contains('yellow') && !divBox.classList.contains('red')) {
         if (this.playerTurn == 'Yellow') {
           divBox.classList.add('yellow');
@@ -32,7 +35,7 @@ export class Connect4Component {
     this.checkForDraw();
   }
   public resetGame() {
-    const allDivs = this.elementRef.nativeElement.querySelectorAll('.rowDiv > div');
+    const allDivs = this.elementRef.nativeElement.querySelectorAll('.rowDiv a');
     for (let i = 0; i < 42; i++) {
       allDivs[i].classList.remove('yellow');
       allDivs[i].classList.remove('red');
@@ -41,6 +44,7 @@ export class Connect4Component {
         allButtons[i].disabled = false;
       }
     }
+    this.hasWon = false;
     this.br = 0;
   }
   public disableButtons() {
@@ -61,17 +65,21 @@ export class Connect4Component {
     for (let j = 0; j < 6; j++) {
       const currentDiv = allDivRows[j];
       for (let i = 0; i < 3; i++) {
-        const first = currentDiv.querySelectorAll('div')[i];
-        const second = currentDiv.querySelectorAll('div')[i + 1];
-        const third = currentDiv.querySelectorAll('div')[i + 2];
-        const fourth = currentDiv.querySelectorAll('div')[i + 3];
+        const first = currentDiv.querySelectorAll('a')[i];
+        const second = currentDiv.querySelectorAll('a')[i + 1];
+        const third = currentDiv.querySelectorAll('a')[i + 2];
+        const fourth = currentDiv.querySelectorAll('a')[i + 3];
         if (this.checkFourInARow(first, second, third, fourth, "yellow")) {
+          this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
+          this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          return;
         }
       }
     }
@@ -82,21 +90,25 @@ export class Connect4Component {
         const div2 = allDivRows[i + 1];
         const div3 = allDivRows[i + 2];
         const div4 = allDivRows[i + 3];
-        const first = div1.querySelectorAll('div')[j];
-        const second = div2.querySelectorAll('div')[j];
-        const third = div3.querySelectorAll('div')[j];
-        const fourth = div4.querySelectorAll('div')[j];
+        const first = div1.querySelectorAll('a')[j];
+        const second = div2.querySelectorAll('a')[j];
+        const third = div3.querySelectorAll('a')[j];
+        const fourth = div4.querySelectorAll('a')[j];
         if (this.checkFourInARow(first, second, third, fourth, "yellow")) {
+          this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
+          this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          return;
         }
       }
     }
-    const allDivs = this.elementRef.nativeElement.querySelectorAll('.rowDiv > div');
+    const allDivs = this.elementRef.nativeElement.querySelectorAll('.rowDiv a');
     // check for win in diagonal
     for (let j = 0; j < 24; j++) {
       if (j % 6 > 2) {
@@ -105,12 +117,16 @@ export class Connect4Component {
         const third = allDivs[j + 10];
         const fourth = allDivs[j + 15];
         if (this.checkFourInARow(first, second, third, fourth, "yellow")) {
+          this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
+          this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          return;
         }
       }
       if (j % 6 <= 2) {
@@ -119,19 +135,23 @@ export class Connect4Component {
         const third = allDivs[j + 14];
         const fourth = allDivs[j + 21];
         if (this.checkFourInARow(first, second, third, fourth, "yellow")) {
+          this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
+          this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          return;
         }
       }
     }
   }
   public checkForDraw() {
     // check for draw
-    if (this.br === 42) {
+    if (this.br === 42 && this.hasWon == false) {
       alert("Draw!");
       this.disableButtons();
     }

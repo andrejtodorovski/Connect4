@@ -12,7 +12,7 @@
     margin: auto;
     margin-top: 20px;
 }
-.rowDiv > div{
+.rowDiv a {
     width: 80%;
     height: 100%;
     margin: 5px;
@@ -20,8 +20,9 @@
     background-color: white;
     border-radius: 50%;
     border: 1px solid black;
+    cursor: pointer;
 }
-.rowDiv > button{
+.rowDiv > .arrowButton{
     width: 100%;
     border: 0;
     background-color: gray!important;
