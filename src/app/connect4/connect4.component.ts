@@ -39,6 +39,7 @@ export class Connect4Component {
     for (let i = 0; i < 42; i++) {
       allDivs[i].classList.remove('yellow');
       allDivs[i].classList.remove('red');
+      allDivs[i].classList.remove("border");
       const allButtons = this.elementRef.nativeElement.querySelectorAll('.rowDiv > button');
       for (let i = 0; i < allButtons.length; i++) {
         allButtons[i].disabled = false;
@@ -51,6 +52,10 @@ export class Connect4Component {
     const allButtons = this.elementRef.nativeElement.querySelectorAll('.rowDiv > button');
     for (let i = 0; i < allButtons.length; i++) {
       allButtons[i].disabled = true;
+    }
+    const allDivs = this.elementRef.nativeElement.querySelectorAll('.rowDiv a');
+    for (let i = 0; i < allDivs.length; i++) {
+      allDivs[i].classList.add("inactiveLink");
     }
   }
   public checkFourInARow(first: any, second: any, third: any, fourth: any, color: string): boolean {
@@ -73,12 +78,14 @@ export class Connect4Component {
           this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
           this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
       }
@@ -98,12 +105,14 @@ export class Connect4Component {
           this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
           this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
       }
@@ -120,12 +129,14 @@ export class Connect4Component {
           this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
           this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
       }
@@ -138,12 +149,14 @@ export class Connect4Component {
           this.hasWon = true;
           alert("yellow win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
         if (this.checkFourInARow(first, second, third, fourth, "red")) {
           this.hasWon = true;
           alert("red win!");
           this.disableButtons();
+          this.flashDivBoxes(first,second,third,fourth);
           return;
         }
       }
@@ -155,5 +168,11 @@ export class Connect4Component {
       alert("Draw!");
       this.disableButtons();
     }
+  }
+  public flashDivBoxes(first: any, second: any, third: any, fourth: any){
+        first.classList.add("border");
+        second.classList.add("border");
+        third.classList.add("border");
+        fourth.classList.add("border");
   }
 }

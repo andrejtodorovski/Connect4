@@ -35,6 +35,9 @@
 .yellow{
     background-color: yellow!important;
 }
+.border{
+    opacity: 0.5;
+}
 h1{
     text-align: center;
 }
@@ -44,3 +47,7 @@ h1{
 .resetButton{
     font-size: 24px;
 }
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+ }
