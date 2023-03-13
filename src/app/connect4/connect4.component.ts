@@ -40,6 +40,7 @@ export class Connect4Component {
       allDivs[i].classList.remove('yellow');
       allDivs[i].classList.remove('red');
       allDivs[i].classList.remove("border");
+      allDivs[i].classList.remove("inactiveLink");
       const allButtons = this.elementRef.nativeElement.querySelectorAll('.rowDiv > button');
       for (let i = 0; i < allButtons.length; i++) {
         allButtons[i].disabled = false;
