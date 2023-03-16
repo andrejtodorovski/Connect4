@@ -13,10 +13,8 @@ export class Connect4Component {
   public handleButtonClick(buttonNumber: string): any {
     // Get the row where the button was clicked
     const buttonClickedRow = this.elementRef.nativeElement.querySelectorAll('.rowDiv')[parseInt(buttonNumber)];
-    console.log(buttonClickedRow);
     for (let i = 5; i >= 0; i--) {
       const divBox = buttonClickedRow.querySelectorAll('a')[i];
-      console.log(divBox);
       if (!divBox.classList.contains('yellow') && !divBox.classList.contains('red')) {
         if (this.playerTurn == 'Yellow') {
           divBox.classList.add('yellow');
